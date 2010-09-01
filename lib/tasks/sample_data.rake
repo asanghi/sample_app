@@ -31,7 +31,9 @@ def make_microposts
   User.all(:limit => 6).each do |user|
     50.times do
       content = Faker::Lorem.sentence(5)
-      user.microposts.create!(:content => content, :created_at => rand(10).hours.ago)
+      post = user.microposts.build(:content => content)
+      post.created_at = rand(1000).minutes.ago
+      post.save!
     end
   end
 end
